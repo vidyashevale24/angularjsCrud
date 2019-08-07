@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  ng-app="crudApp">
+	<head>
+		<title>AngularJS PHP CRUD (Create, Read, Update, Delete) using Bootstrap Modal</title>
+		<script src="js/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0-rc.0/angular.min.js"></script>
+		<script src="https://code.angularjs.org/1.7.0-rc.0/angular-messages.min.js"></script>
+        <script src="https://code.angularjs.org/1.7.0-rc.0/angular-resource.min.js"></script>
+		<script src="js/jquery.dataTables.min.js"></script>
+		<script src="js/angular-datatables.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/main.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/datatables.bootstrap.css">
+	</head>
+	
+	<body>
+		<div ng-controller="crudController">
+			<div class="container" ng-init="fetchData()">
+				<h1>Angular JS PHP, Create, Read, Update, Delete using Bootstarp</h1>
+				<div class="table-responsive" style="overflow-x: unset">
+					<table datatable="ng" dt-options="vm.dtOptions" class ="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="name in namesData">
+								<td>{{ name.firstName }} </td>
+								<td>{{ name.lastName }} </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
