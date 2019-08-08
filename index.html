@@ -25,7 +25,7 @@
 				{{successMessage}}
 			</div>
 			<div align="right">
-				<button type="button" name="add_button" ng-click="addData()" class="btn btn-success">Add</button>
+				<button type="button" name="add_button" ng-click="addData()" data-toggle="modal" data-target="#crudmodal" class="btn btn-success">Add</button>
 			</div>
 			<br />
 			<div class="table-responsive" style="overflow-x: unset;">
@@ -42,7 +42,7 @@
 						<tr ng-repeat="name in namesData">
 							<td>{{name.firstName}}</td>
 							<td>{{name.lastName}}</td>
-							<td><button type="button" class="btn btn-warning btn-xs" ng-click="fetchSingleData(name.id)">Edit</button></td>
+							<td><button type="button" class="btn btn-warning btn-xs" ng-click="fetchSingleData(name.id)" data-toggle="modal" data-target="#crudmodal">Edit</button></td>
 							<td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteData(name.id)">Delete</button></td>
 						</tr>
 					</tbody>
@@ -83,5 +83,4 @@
     	</div>
   	</div>
 </div>
-
 
