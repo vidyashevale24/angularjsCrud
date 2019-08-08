@@ -19,15 +19,15 @@ if($form_data['action'] == 'fetch_single_data'){
 		$output['firstName'] = $result['firstName'];
 		$output['lastName'] = $result['lastName'];
 	}
-}/*
-elseif($form_data->action == "Delete"){
+}
+elseif($form_data['action'] == "Delete"){
 	$query = "DELETE FROM profile WHERE id='".$form_data['id']."'";
 	$statement = $connect->prepare($query);
 	if($statement->execute())
 	{
-		$output['message'] = 'Record has been deleted successfully';
+		$message = 'Record Deleted Successfully.';
 	}
-}*/
+}
 else{
 	
 	if(empty($form_data['firstName'])){
@@ -89,10 +89,7 @@ else{
 		$validation_error = implode(",",$error);
 	}
 }
-
-//print_r($output);die;
 $output['error']   = $validation_error;
 $output['message'] = $message;
-
 echo json_encode($output);
 ?>

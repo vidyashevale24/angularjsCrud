@@ -9,7 +9,7 @@ app.controller('crudController', function($scope, $http){
 			url: 'http://localhost:81/VS/crudAngular/api/fetch_data.php',
 			headers : {'Accept' : 'application/json'}
 		}).then(function (result){
-			console.log(result.data);
+			//console.log(result.data);
 			$scope.namesData = result.data;
 		},function (error){
 
@@ -49,19 +49,19 @@ app.controller('crudController', function($scope, $http){
 		})
 		.then(function(response) {
 			//Success
-			console.log(response);
-				if(response.data.error !=''){
-					$scope.success 			=	 false;
-					$scope.error 			=	 true;
-					$scope.errorMessage 	=	 response.data.error;
-				}else{
-					$scope.success 			= 	true;
-					$scope.error 			= 	false;
-					$scope.successMessage 	= 	response.data.message;
-					$scope.form_data 	  	= 	{};
-					$scope.closeModal();
-					$scope.fetchData();
-				}
+			//console.log(response);
+			if(response.data.error !=''){
+				$scope.success 			=	 false;
+				$scope.error 			=	 true;
+				$scope.errorMessage 	=	 response.data.error;
+			}else{
+				$scope.success 			= 	true;
+				$scope.error 			= 	false;
+				$scope.successMessage 	= 	response.data.message;
+				$scope.form_data 	  	= 	{};
+				$scope.closeModal();
+				$scope.fetchData();
+			}
 		}, 
 		function(response) {
 			// Failed
@@ -70,7 +70,6 @@ app.controller('crudController', function($scope, $http){
 	}
 	//Fetch single Record
 	$scope.fetchSingleData = function(id){
-		console.log(id);
 		$http({
 		url: 'http://localhost:81/VS/crudAngular/api/insert.php',
 		method: "POST",
@@ -94,6 +93,28 @@ app.controller('crudController', function($scope, $http){
 			// Failed
 			console.log("in else"+response);
 		});
+	}
+	$scope.deleteData = function(id){
+			if(confirm("Are you sure you want to remove it?"))
+			{
+				$http({
+					method:"POST",
+					url:"http://localhost:81/VS/crudAngular/api/insert.php",
+					data:{'id':id, 'action':'Delete'}
+				})
+				.then(function(response) {
+					//Success
+					//console.log(response);
+					$scope.success = true;
+					$scope.error = false;
+					$scope.successMessage = response.data.message;
+					$scope.fetchData();
+			}, 
+			function(response) {
+				// Failed
+				console.log("in else"+response);
+			});
+		}
 	}
 });
 
