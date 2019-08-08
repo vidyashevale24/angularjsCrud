@@ -42,13 +42,12 @@
 						<tr ng-repeat="name in namesData">
 							<td>{{name.firstName}}</td>
 							<td>{{name.lastName}}</td>
-							<td><button type="button" class="btn btn-warning btn-xs">Edit</button></td>
+							<td><button type="button" class="btn btn-warning btn-xs" ng-click="fetchSingleData(name.id)">Edit</button></td>
 							<td><button type="button" class="btn btn-danger btn-xs">Delete</button></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-
 		</div>
 	</body>
 </html>

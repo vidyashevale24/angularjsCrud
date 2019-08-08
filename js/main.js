@@ -1,8 +1,7 @@
 var app = angular.module('crudApp', ['datatables']);
 app.controller('crudController', function($scope, $http){
-
-	$scope.success = false;
-	$scope.error = false;
+    $scope.success = 	false;
+	$scope.error   = 	false;
 
 	$scope.fetchData = function(){
 		$http({
@@ -28,8 +27,8 @@ app.controller('crudController', function($scope, $http){
 	};
 
 	$scope.addData = function(){
-		$scope.modalTitle = 'Add Data';
-		$scope.submit_button = 'Insert';
+		$scope.modalTitle 		= 'Add New Record';
+		$scope.submit_button 	= 'Insert';
 		$scope.openModal();
 	};
 
@@ -51,20 +50,47 @@ app.controller('crudController', function($scope, $http){
 		.then(function(response) {
 			//Success
 			console.log(response);
-				if(response.data.error != ''){
-					$scope.success = false;
-					$scope.error = true;
-					$scope.errorMessage = response.data.error;
+				if(response.data.error !=''){
+					$scope.success 			=	 false;
+					$scope.error 			=	 true;
+					$scope.errorMessage 	=	 response.data.error;
 				}else{
-					$scope.success = true;
-					$scope.error = false;
-					$scope.successMessage = response.data.message;
-					$scope.form_data = {};
+					$scope.success 			= 	true;
+					$scope.error 			= 	false;
+					$scope.successMessage 	= 	response.data.message;
+					$scope.form_data 	  	= 	{};
 					$scope.closeModal();
 					$scope.fetchData();
 				}
 		}, 
-		function(response) { // optional
+		function(response) {
+			// Failed
+			console.log("in else"+response);
+		});
+	}
+	//Fetch single Record
+	$scope.fetchSingleData = function(id){
+		console.log(id);
+		$http({
+		url: 'http://localhost:81/VS/crudAngular/api/insert.php',
+		method: "POST",
+		data: { 
+				'id'		:	id,
+				'action'	:	'fetch_single_data'
+			 },
+		
+		})
+		.then(function(response) {
+			console.log(response);
+			//Success
+			$scope.firstName	=	response.data.firstName;
+			$scope.lastName		=	response.data.lastName;
+			$scope.hidden_id	=	id;
+			$scope.modalTitle	=	'Edit existing Record';
+			$scope.submit_button=	'Edit';
+			$scope.openModal	=	$scope.openModal();
+		}, 
+		function(response) {
 			// Failed
 			console.log("in else"+response);
 		});
